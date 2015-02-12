@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>BCOVOUX Reference</title>
+		<link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.2 (build 963)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="index.html">BCOVOUX </a></h1>
+				<a id="developerHome" href="index.html">Brightcove</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">BCOVOUX Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar"></ul>
+		</header>
+		<article>
+			<div id="overview_contents" role="main">
+				<div class="main-navigation navigation-top">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">BCOVOUX Reference</h1>
+					</div>		
+				</div>
+				<div id="container">
+					
+					<div class="section section-overview index-overview">
+						
+						
+						<h1>BCOVOUX Plugin for Brightcove Player SDK for iOS, version 1.0.0.85</h1>
+
+<h1>Requirements</h1>
+
+<p>This plugin supports iOS 7.0+ and Xcode 6.0+.</p>
+
+<h1>Installation</h1>
+
+<p>You can use <a href="http://cocoapods.org">Cocoapods</a> to add the OUX Plugin for Brightcove Player SDK to your project.  You can find the latest <code>Brightcove-Player-SDK-OUX</code> podspec <a href="https://github.com/CocoaPods/Specs/tree/master/Specs/Brightcove-Player-SDK-OUX">here</a>.</p>
+
+<p>To add the OUX Plugin for Brightcove Player SDK to your project manually:</p>
+
+<ol>
+<li>Install the latest version of the <a href="https://github.com/brightcove/brightcove-player-sdk-ios">Brightcove Player SDK</a>.</li>
+<li>Download the latest zip'ed release of the plugin from our <a href="https://github.com/brightcove/brightcove-player-sdk-ios-oux/releases">release page</a>.</li>
+<li>Add the contents of Library and Headers to the project.</li>
+<li>On the &ldquo;Build Phases&rdquo; tab of your application target, add the following to the &ldquo;Link
+ Binary With Libraries&rdquo; phase:
+
+<ul>
+<li><code>libBCOVOUX.a</code></li>
+<li><code>WebKit.framework</code>; set status as <code>optional</code>.</li>
+</ul>
+</li>
+<li>On the &ldquo;Build Settings&rdquo; tab of your application target:
+
+<ul>
+<li>Ensure that BCOVOUX headers are in your application&rsquo;s &ldquo;Header Search Path&rdquo;.</li>
+<li>Ensure that <code>-ObjC</code> has been added to the &ldquo;Other Linker Flags&rdquo; build setting.</li>
+</ul>
+</li>
+</ol>
+
+
+<h1>Quick Start</h1>
+
+<p>BCOVOUX is a plugin for <a href="https://github.com/brightcove/brightcove-player-sdk-ios">Brightcove Player SDK for iOS</a> that provides support for Brightcove OnceUX server side ad stitching. Its use is relatively straightforward.</p>
+
+<pre><code>[1] BCOVOUXAdComponentDisplayContainer *displayContainer = [[BCOVOUXAdComponentDisplayContainer alloc] initWithAdComponentContainer:self.videoContainer companionSlots:nil];
+
+    BCOVPlayerSDKManager *manager = [BCOVPlayerSDKManager sharedManager];
+[2] id&lt;BCOVPlaybackController&gt; controller = [manager createOUXPlaybackControllerWithViewStrategy:[manager BCOVOUXdefaultControlsViewStrategy]];
+    controller.delegate = self;
+[3] [controller addSessionConsumer:displayContainer];
+
+[4] [self.videoContainer addSubview:controller.view];
+
+[5] BCOVVideo *video = [BCOVVideo videoWithURL:[NSURL URLWithString:&lt;url-to-once-ux-video&gt;]];
+[6] [controller setVideos:@[ video ]];
+    [controller play];
+</code></pre>
+
+<p>Let&rsquo;s break this code down into steps, to make it a bit simpler to digest:</p>
+
+<ol>
+<li>First you will want to create an BCOVOUXAdComponentDisplayContainer. This object will provide the ad UI and help manage any companion slots. Pass in the view you want the ad UI to show up in and any companion slots that you have, if any.</li>
+<li>BCOVOUX adds some category methods to BCOVPlaybackManager. The first of these is <code>-createOUXPlaybackControllerWithViewStrategy:</code>. Use this method to create your playback controller.</li>
+<li>In order for the BCOVOUXAdComponentDisplayContainer to display ad information and populate companion ad views, it must be added as a session consumer.</li>
+<li>Add the playback controller&rsquo;s view to your video container. This will probably be the same view you used in step 1.</li>
+<li>Create a BCOVVideo using the URL to your OnceUX VMAP document.</li>
+<li>Load the video into the playback controller.</li>
+</ol>
+
+
+<p>If you have questions or need help, we have a support forum for Brightcove&rsquo;s native Player SDKs at <a href="https://groups.google.com/forum/#!forum/brightcove-native-player-sdks">https://groups.google.com/forum/#!forum/brightcove-native-player-sdks</a> .</p>
+
+<h1>Obtaining Ad playback Information</h1>
+
+<p>BCOVOUX provides ad playback information via the <code>BCOVPlaybackControllerAdsDelegate</code>. For example, if you want to hide your controls during an ad, you could implement <code>[BCOVPlaybackControllerAdsDelegate playbackController:playbackSession:didEnterAdSequence:]</code> to hide them.</p>
+
+<p>For more information on how to use these delegate methods, please see <a href="https://github.com/brightcove/brightcove-player-sdk-ios">Brightcove Player SDK for iOS</a>.</p>
+
+<h1>Seeking</h1>
+
+<p>The BCOVOUX plugin provides a seeking function that should be used when implementing controls. This seek function is exposed on the session through the <code>providerExtension</code> property. Here is how it is used:</p>
+
+<pre><code>CMTime contentTimeToSeekTo = &lt;calculation-from-scrub-bar&gt;;
+[self.currentSession.providerExtension oux_seekToTime:contentTimeToSeekTo completionHandler:^(BOOL finished) {
+
+    if (finished)
+    {
+        [self.currentSession.player play];
+    }
+
+}];
+</code></pre>
+
+<p>The <code>completionHandler</code> will execute at the completion of a successful seek. It will not execute if a seek was already initiated by a previous call to <code>[BCOVSessionProviderExtension oux_seekToTime:completionHandler:]</code> or if an ad is playing back. To test whether a see attempt can be made, check the <code>-[BCOVSessionProviderExtension oux_canSeek]</code> property. For more information on both of these methods, be sure to read their <a href="https://github.com/brightcove/brightcove-player-sdk-ios-oux/blob/master/Headers/BCOVOUXComponent.h">headerdoc</a>.</p>
+
+<h1>Known Issues</h1>
+
+<ul>
+<li><p>You can not use BCOVOUX with any other BCOV plugins.</p></li>
+<li><p>The plugin currently does not support playing back OnceUX content and non OnceUX content in the same playback controller. If you need to play both, you will need to create a separate playback controller for this content.</p></li>
+<li><p>When playing OnceUX content, you may see a message in the log that states &ldquo;No source found with deliveryMethod of HLS or MP4, falling back to the first source.&rdquo;. This message can be ignored and will be addressed in a future update.</p></li>
+<li><p>If the request for the OnceUX VMAP document fails to load, in addition to receiving an error event, you may see a message in the log that states &ldquo;Cannot -forwardInvocation: to nonexistent inner playback session.&rdquo;. This message can be ignored and will be addressed in a future update.</p></li>
+</ul>
+
+						
+						
+					</div>
+					
+                        
+                    
+					
+					
+					<div class="index-column">
+						<h2 class="index-title">Class References</h2>
+						<ul>
+							
+							<li><a href="Classes/BCOVOUXAdComponentDisplayContainer.html">BCOVOUXAdComponentDisplayContainer</a></li>
+							
+							<li><a href="Classes/BCOVOUXCompanionSlot.html">BCOVOUXCompanionSlot</a></li>
+							
+							<li><a href="Classes/BCOVOUXSessionProvider.html">BCOVOUXSessionProvider</a></li>
+							
+							<li><a href="Classes/BCOVOUXSessionProviderOptions.html">BCOVOUXSessionProviderOptions</a></li>
+							
+						</ul>
+					</div>
+					
+					
+						
+					<div class="index-column">
+						
+						<h2 class="index-title">Protocol References</h2>
+						<ul>
+							
+							<li><a href="Protocols/BCOVOUXAdComponentDelegate.html">BCOVOUXAdComponentDelegate</a></li>
+							
+						</ul>
+						
+                        
+						
+						<h2 class="index-title">Category References</h2>
+						<ul>
+							
+							<li><a href="Categories/BCOVPlayerSDKManager+BCOVOUXAdditions.html">BCOVPlayerSDKManager(BCOVOUXAdditions)</a></li>
+							
+							<li><a href="Categories/BCOVSessionProviderExtension+BCOVOUXAdditions.html">BCOVSessionProviderExtension(BCOVOUXAdditions)</a></li>
+							
+						</ul>
+						
+					</div>
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2015 Brightcove. All rights reserved. (Last updated: 2015-02-12)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 963)</a>.</span></p>
+						
+	
+					</div>
+				</div>
+			</div>
+		</article>		
+	</body>
+</html>
