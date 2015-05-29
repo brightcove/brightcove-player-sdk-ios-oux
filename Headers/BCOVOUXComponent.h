@@ -74,7 +74,6 @@
  *
  * The rules are as follows:
  *
- * - If seeking to the kCMTimeZero, any preroll ads will play.
  * - If seeking to end of the logical content time, the post rolls will play.
  * - If seeking over an ad sequence, the ad will play, and the playhead will resume
  * where the seek had attempted to seek to.
