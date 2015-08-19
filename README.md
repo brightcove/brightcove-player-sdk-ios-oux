@@ -1,4 +1,4 @@
-# BCOVOUX Plugin for Brightcove Player SDK for iOS, version 1.0.1.104
+# BCOVOUX Plugin for Brightcove Player SDK for iOS, version 1.0.2.111
 
 Requirements
 ============
