@@ -1,3 +1,7 @@
+# 1.0.3
+### Additions and Improvements
+* Internal Improvements to support Player SDK 4.4.3.
+
 # 1.0.2
 ### Additions and Improvements
 * You must use the Brightcove Player SDK for iOS version 4.4.0+.
