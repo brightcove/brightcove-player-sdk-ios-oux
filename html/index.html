@@ -44,40 +44,48 @@
 					<div class="section section-overview index-overview">
 						
 						
-						<h1>BCOVOUX Plugin for Brightcove Player SDK for iOS, version 1.0.3.118</h1>
+						<h1>Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 2.0.0.142</h1>
 
-<h1>Requirements</h1>
+<h1>Supported Platforms</h1>
 
-<p>This plugin supports iOS 7.0+ and Xcode 6.0+.</p>
+<p>iOS 7.0 and above.</p>
 
 <h1>Installation</h1>
 
+<p>The Brightcove OnceUX for Brightcove Player SDK provides two installation packages for iOS, a static library framework and a dynamic framework. The static library target supports deployment on iOS 7 while the dynamic framework only supports iOS 8 and above.</p>
+
+<h2>CocoaPods</h2>
+
 <p>You can use <a href="http://cocoapods.org">Cocoapods</a> to add the OUX Plugin for Brightcove Player SDK to your project.  You can find the latest <code>Brightcove-Player-SDK-OUX</code> podspec <a href="https://github.com/CocoaPods/Specs/tree/master/Specs/Brightcove-Player-SDK-OUX">here</a>.</p>
+
+<p>Static Framework example:</p>
+
+<pre><code>pod 'Brightcove-Player-SDK-OUX'
+</code></pre>
+
+<p>Dynamic Framework example:</p>
+
+<pre><code>pod 'Brightcove-Player-SDK-OUX/dynamic'
+</code></pre>
+
+<h2>Manual</h2>
 
 <p>To add the OUX Plugin for Brightcove Player SDK to your project manually:</p>
 
 <ol>
 <li>Install the latest version of the <a href="https://github.com/brightcove/brightcove-player-sdk-ios">Brightcove Player SDK</a>.</li>
-<li>Download the latest zip'ed release of the plugin from our <a href="https://github.com/brightcove/brightcove-player-sdk-ios-oux/releases">release page</a>.</li>
-<li>Add the contents of Library and Headers to the project.</li>
-<li>On the &ldquo;Build Phases&rdquo; tab of your application target, add the following to the &ldquo;Link
- Binary With Libraries&rdquo; phase:
-
-<ul>
-<li><code>libBCOVOUX.a</code></li>
-<li><code>libxml2.2.dylib</code></li>
-<li><code>WebKit.framework</code>; set status as <code>optional</code>.</li>
-</ul>
-</li>
-<li>On the &ldquo;Build Settings&rdquo; tab of your application target:
-
-<ul>
-<li>Ensure that BCOVOUX headers are in your application&rsquo;s &ldquo;Header Search Path&rdquo;.</li>
-<li>Ensure that <code>-ObjC</code> has been added to the &ldquo;Other Linker Flags&rdquo; build setting.</li>
-</ul>
-</li>
+<li>Download the latest zip'ed release of the BrightcoveOUX plugin from our <a href="https://github.com/brightcove/brightcove-player-sdk-ios-oux/releases">release page</a>.</li>
+<li>Add <code>BrightcoveOUX.framework</code> to your project.</li>
+<li>On the &ldquo;Build Settings&rdquo; tab of your application target, ensure that the &ldquo;Framework Search Paths&rdquo; include the path to the framework. This should have been done automatically unless the framework is stored under a different root directory than your project.</li>
+<li>(Dynamic Framework only) On the &ldquo;General&rdquo; tab of your application target, add &lsquo;BrightcoveOUX.framework&rsquo; to the &ldquo;Embedded Binary&rdquo; section.</li>
+<li>(Dynamic Framework only) On the &ldquo;Build Phases&rdquo; tab, add a &ldquo;Run Script&rdquo; phase with the command <code>bash ${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/BrightcoveOUX.framework/strip-frameworks.sh</code>. Check &ldquo;Run script only when installing&rdquo;. This will remove unneeded architectures from the build, which is important for App Store submission. ([rdar://19209161][19209161])</li>
+<li>(Static Framework only) On the &ldquo;Build Settings&rdquo; tab of your application target, add <code>-ObjC</code> to the &ldquo;Other Linker Flags&rdquo; build setting.</li>
 </ol>
 
+
+<h2>Imports</h2>
+
+<p>The OUX Plugin for Brightcove Player SDK for iOS can be imported into code a few different ways; <code>@import BrightcoveOUX;</code>, <code>#import &lt;BrightcoveOUX/BrightcoveOUX.h&gt;</code> or <code>#import &lt;BrightcoveOUX/[specific class].h&gt;</code>.</p>
 
 <h1>Quick Start</h1>
 
@@ -100,7 +108,7 @@
 <p>Let&rsquo;s break this code down into steps, to make it a bit simpler to digest:</p>
 
 <ol>
-<li>First you will want to create an <a href="Classes/BCOVOUXAdComponentDisplayContainer.html">BCOVOUXAdComponentDisplayContainer</a>. This object will provide the ad UI and help manage any companion slots. Pass in the view you want the ad UI to show up in and any companion slots that you have, if any.</li>
+<li>First you will want to create an BCOVOUXAdComponentDisplayContainer. This object will provide the ad UI and help manage any companion slots. Pass in the view you want the ad UI to show up in and any companion slots that you have, if any.</li>
 <li>BCOVOUX adds some category methods to BCOVPlaybackManager. The first of these is <code>-createOUXPlaybackControllerWithViewStrategy:</code>. Use this method to create your playback controller.</li>
 <li>In order for the BCOVOUXAdComponentDisplayContainer to display ad information and populate companion ad views, it must be added as a session consumer.</li>
 <li>Add the playback controller&rsquo;s view to your video container. This will probably be the same view you used in step 1.</li>
@@ -132,7 +140,7 @@
 }];
 </code></pre>
 
-<p>The <code>completionHandler</code> will execute at the completion of a successful seek. It will not execute if a seek was already initiated by a previous call to <code>-[BCOVSessionProviderExtension oux_seekToTime:completionHandler:]</code> or if an ad is playing back. To test whether a see attempt can be made, check the <code>-[BCOVSessionProviderExtension oux_canSeek]</code> property. For more information on both of these methods, be sure to read their <a href="https://github.com/brightcove/brightcove-player-sdk-ios-oux/blob/master/Headers/BCOVOUXComponent.h">headerdoc</a>.</p>
+<p>The <code>completionHandler</code> will execute at the completion of a successful seek. It will not execute if a seek was already initiated by a previous call to <code>[BCOVSessionProviderExtension oux_seekToTime:completionHandler:]</code> or if an ad is playing back. To test whether a see attempt can be made, check the <code>[BCOVSessionProviderExtension oux_canSeek]</code> property. For more information on both of these methods, be sure to read their <a href="https://github.com/brightcove/brightcove-player-sdk-ios-oux/blob/master/ios/static/BrightcoveOUX.framework/Headers/BCOVOUXComponent.h">headerdoc</a>.</p>
 
 <h1>Known Issues</h1>
 
@@ -159,10 +167,6 @@
 								<li><a href="Classes/BCOVOUXAdComponentDisplayContainer.html">BCOVOUXAdComponentDisplayContainer</a></li>
 								
 								<li><a href="Classes/BCOVOUXCompanionSlot.html">BCOVOUXCompanionSlot</a></li>
-								
-								<li><a href="Classes/BCOVOUXSessionProvider.html">BCOVOUXSessionProvider</a></li>
-								
-								<li><a href="Classes/BCOVOUXSessionProviderOptions.html">BCOVOUXSessionProviderOptions</a></li>
 								
 							</ul>
 						</div>
@@ -198,7 +202,7 @@
 					<footer>
 						<div class="footer-copyright">
 							
-							<p class="copyright">Copyright &copy; 2015 Brightcove. All rights reserved. Updated: 2015-10-30</p>
+							<p class="copyright">Copyright &copy; 2015 Brightcove. All rights reserved. Updated: 2015-12-30</p>
 							
 							
 							<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1333)</a>.</p>

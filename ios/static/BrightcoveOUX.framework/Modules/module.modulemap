@@ -1,0 +1,6 @@
+framework module BrightcoveOUX {
+  umbrella header "BrightcoveOUX.h"
+
+  export *
+  module * { export * }
+}
