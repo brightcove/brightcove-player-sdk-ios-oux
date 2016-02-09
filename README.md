@@ -1,4 +1,4 @@
-# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 2.0.0.142
+# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 2.0.1.159
 
 Supported Platforms
 ===================
@@ -44,7 +44,7 @@ The OUX Plugin for Brightcove Player SDK for iOS can be imported into code a few
 
 Quick Start
 ===========
-BCOVOUX is a plugin for [Brightcove Player SDK for iOS][bcovsdk] that provides support for Brightcove OnceUX server side ad stitching. Its use is relatively straightforward.
+BrightcoveOUX is a plugin for [Brightcove Player SDK for iOS][bcovsdk] that provides support for Brightcove OnceUX server side ad stitching. Its use is relatively straightforward.
 
     [1] BCOVOUXAdComponentDisplayContainer *displayContainer = [[BCOVOUXAdComponentDisplayContainer alloc] initWithAdComponentContainer:self.videoContainer companionSlots:nil];
     
@@ -74,7 +74,7 @@ If you have questions or need help, we have a support forum for Brightcove's nat
 
 Obtaining Ad playback Information
 =======
-BCOVOUX provides ad playback information via the `BCOVPlaybackControllerAdsDelegate`. For example, if you want to hide your controls during an ad, you could implement `-[BCOVPlaybackControllerAdsDelegate playbackController:playbackSession:didEnterAdSequence:]` to hide them.
+BrightcoveOUX provides ad playback information via the `BCOVPlaybackControllerAdsDelegate`. For example, if you want to hide your controls during an ad, you could implement `-[BCOVPlaybackControllerAdsDelegate playbackController:playbackSession:didEnterAdSequence:]` to hide them.
 
 For more information on how to use these delegate methods, please see [Brightcove Player SDK for iOS][bcovsdk].
 
@@ -83,7 +83,7 @@ For more information on how to use these delegate methods, please see [Brightcov
 Seeking
 =======
 
-The BCOVOUX plugin provides a seeking function that should be used when implementing controls. This seek function is exposed on the session through the `providerExtension` property. Here is how it is used:
+The BrightcoveOUX plugin provides a seeking function that should be used when implementing controls. This seek function is exposed on the session through the `providerExtension` property. Here is how it is used:
     
     
     CMTime contentTimeToSeekTo = <calculation-from-scrub-bar>;
@@ -103,7 +103,7 @@ The `completionHandler` will execute at the completion of a successful seek. It 
 Known Issues
 ==========================
 
-* You can not use BCOVOUX with any other BCOV plugins.
+* You can not use BrightcoveOUX with any other Brightcove plugins except for the BrightcoveFairPlay plugin.
 
 * The plugin currently does not support playing back OnceUX content and non OnceUX content in the same playback controller. If you need to play both, you will need to create a separate playback controller for this content.
 

@@ -1,3 +1,13 @@
+# 2.0.1
+### Breaking Changes
+* After seeking over an ad, the ad will play, and then the regular video content will play. Previously, after seeking over an ad, the regular video content would play only if it had previously been playing.
+
+### Additions and Improvements
+* Fixes an issue where FairPlay-protected content would not play.
+* Fixes an issue where controls would show on a post-roll ad.
+* Fixes an issue where progress would be reported erratically when seeking over an ad on iOS 8.
+* Adds more robust handling of unexpected ad data.
+
 # 2.0.0
 ### Breaking Changes
 * The static library distributable has been removed. If installed manually (not CocoaPods), you will need to remove `libBCOVOUX.a` and its headers from the Header Search Path. Please see README.md for new install options (including a static library framework).
