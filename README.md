@@ -11,7 +11,7 @@ The Brightcove OnceUX for Brightcove Player SDK provides two installation packag
 CocoaPods
 --------------
 
-You can use [Cocoapods][cocoapods] to add the OUX Plugin for Brightcove Player SDK to your project.  You can find the latest `Brightcove-Player-SDK-OUX` podspec [here][podspecs].
+You can use [CocoaPods][cocoapods] to add the OUX Plugin for Brightcove Player SDK to your project.  You can find the latest `Brightcove-Player-SDK-OUX` podspec [here][podspecs].
 
 Static Framework example:
 
