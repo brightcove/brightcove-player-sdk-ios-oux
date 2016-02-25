@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
  * - If seeking over an ad sequence, the ad will play, and the playhead will resume
  * where the seek had attempted to seek to.
  * - If seeking over multiple ad sequences, only the last ad sequence will play.
- * - If seeking backwords, no ads will play.
+ * - If seeking backwards, no ads will play.
  * - If seeking over ads that have already been played, they will play again.
  *
  * @param time The logical time to seek to

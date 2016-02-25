@@ -1,3 +1,8 @@
+# 2.0.2
+### Additions and Improvements
+* The BCOVPlaybackSession BCOVVideo property now includes cue points to represent the start of each Ad sequence.
+* Internal Improvements.
+
 # 2.0.1
 ### Breaking Changes
 * After seeking over an ad, the ad will play, and then the regular video content will play. Previously, after seeking over an ad, the regular video content would play only if it had previously been playing.
