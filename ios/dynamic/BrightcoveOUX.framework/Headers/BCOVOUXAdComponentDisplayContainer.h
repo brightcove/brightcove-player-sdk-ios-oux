@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  * when an ad is going to be played, and it is removed when the ad is complete.
  *
  * When an ad contains companions, this object will attempt to match the width
- * and height of those companions with the with and height of the BCOVOUXCompanionSlots
+ * and height of those companions with the width and height of the BCOVOUXCompanionSlots
  * managed by this object. If no match is found, the companion will not be populated.
  * If a match occurs, the companion slot will remain populated until another ad
  * with a matching companion slot takes its place.

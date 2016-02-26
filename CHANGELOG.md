@@ -1,3 +1,7 @@
+# 2.0.3
+### Additions and Improvements
+* Fixes an issue where Once ads would not play normally on devices where the Region was set to certain international locales.
+
 # 2.0.2
 ### Additions and Improvements
 * The BCOVPlaybackSession BCOVVideo property now includes cue points to represent the start of each Ad sequence.
