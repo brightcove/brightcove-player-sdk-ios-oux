@@ -1,3 +1,11 @@
+# 2.0.4
+### Additions and Improvements
+* Fixes an issue where seeking due to slider scrubbing would not work reliably.
+
+### Breaking Changes
+* This release requires that you use Brightcove Player SDK for iOS version 5.0.3+.
+
+
 # 2.0.3
 ### Additions and Improvements
 * Fixes an issue where Once ads would not play normally on devices where the Region was set to certain international locales.
