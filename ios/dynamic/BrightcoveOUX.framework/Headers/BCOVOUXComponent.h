@@ -71,7 +71,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * This method implements the default seek behaviour for the BCOVOUX plugin.
  * This method must be called on the main thread. The receiver will ignore this
- * meassage when either an ad is in progress or a previous call to `oux_seekToTime:completionHandler:` 
+ * message when either an ad is in progress or a previous call to `oux_seekToTime:completionHandler:` 
  * is still being processed. See also `oux_canSeek`.
  *
  * The rules are as follows:

@@ -1,10 +1,14 @@
+# 2.0.5
+### Additions and Improvements
+* When a OnceUX stream stalls due to network slowdowns or interruptions, it can now be restarted using ` [BCOVPlaybackController resumeVideoAtTime:withAutoPlay:]`. Previously, only streams without OnceUX or FairPlay could be restarted.
+* Seek speed is improved when not seeking over ads.
+
 # 2.0.4
 ### Additions and Improvements
 * Fixes an issue where seeking due to slider scrubbing would not work reliably.
 
 ### Breaking Changes
 * This release requires that you use Brightcove Player SDK for iOS version 5.0.3+.
-
 
 # 2.0.3
 ### Additions and Improvements

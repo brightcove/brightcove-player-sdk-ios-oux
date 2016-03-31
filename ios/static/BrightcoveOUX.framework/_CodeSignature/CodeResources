@@ -14,7 +14,7 @@
 		</data>
 		<key>Headers/BCOVOUXComponent.h</key>
 		<data>
-		zh2cHOHBK85xc8pTmwJwNmKOBvQ=
+		KQ6G2fqm/og7FXu5gk7zOkPV5n8=
 		</data>
 		<key>Headers/BCOVOUXConstants.h</key>
 		<data>
@@ -26,7 +26,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		NySn/rlKgsJrtm9lPuwqLfVeX9k=
+		ihJZmHGvn+rweCA3AEgjbtqH84g=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -36,29 +36,71 @@
 	<key>files2</key>
 	<dict>
 		<key>Headers/BCOVOUXAdComponentDisplayContainer.h</key>
-		<data>
-		ffG+gVQ3H0BNrBtrXsditMbJ5Eo=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			ffG+gVQ3H0BNrBtrXsditMbJ5Eo=
+			</data>
+			<key>hash2</key>
+			<data>
+			1gncKMFUo1trSWcZCFm4Y2E+4LgmmPXIC/UXxfzBhp4=
+			</data>
+		</dict>
 		<key>Headers/BCOVOUXCompanionSlot.h</key>
-		<data>
-		iUznfYuN1UofGRFNjFywjlv0jq8=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			iUznfYuN1UofGRFNjFywjlv0jq8=
+			</data>
+			<key>hash2</key>
+			<data>
+			PkREo6Mldb25iOOwEtOSqg4M/AQ/DAag8o+S/ZgUDz4=
+			</data>
+		</dict>
 		<key>Headers/BCOVOUXComponent.h</key>
-		<data>
-		zh2cHOHBK85xc8pTmwJwNmKOBvQ=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			KQ6G2fqm/og7FXu5gk7zOkPV5n8=
+			</data>
+			<key>hash2</key>
+			<data>
+			XU6EK4A+snorLgLlRwIHtMrH9BVRRz9cnuDXTkuSgl8=
+			</data>
+		</dict>
 		<key>Headers/BCOVOUXConstants.h</key>
-		<data>
-		bl6WclGq6R0VWd7UYVHOs4FFIvs=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			bl6WclGq6R0VWd7UYVHOs4FFIvs=
+			</data>
+			<key>hash2</key>
+			<data>
+			dNpKJjXv00+es5hnj1pgzkBjwuDxx+LvKOpOzXIi7BA=
+			</data>
+		</dict>
 		<key>Headers/BrightcoveOUX.h</key>
-		<data>
-		Q5rggODngdn/0fE7QNEfQb//22U=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			Q5rggODngdn/0fE7QNEfQb//22U=
+			</data>
+			<key>hash2</key>
+			<data>
+			wuQUhHgFgTWnyHZcVitTHBKQI9DiMlYG0w+/uN0P3zk=
+			</data>
+		</dict>
 		<key>Modules/module.modulemap</key>
-		<data>
-		qCGw7qEBnWHk0skly7U01oGt0os=
-		</data>
+		<dict>
+			<key>hash</key>
+			<data>
+			qCGw7qEBnWHk0skly7U01oGt0os=
+			</data>
+			<key>hash2</key>
+			<data>
+			RnOahali+1CjJ0E/YhwvvWXwGT71kob8AFxIEXcOG/M=
+			</data>
+		</dict>
 	</dict>
 	<key>rules</key>
 	<dict>
