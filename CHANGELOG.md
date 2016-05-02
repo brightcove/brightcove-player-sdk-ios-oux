@@ -1,3 +1,8 @@
+# 2.0.6
+### Additions and Improvements
+* Support for VMAP 1.0.1 format ad responses. The Brightcove OnceUX plugin now supports both VMAP 1.0 and VMAP 1.0.1 ad response formats.
+* Support for client-side and server-side ad event tracking. Selecting Server-side ad event tracking prevents ad progress events from being tracked through the client.
+
 # 2.0.5
 ### Additions and Improvements
 * When a OnceUX stream stalls due to network slowdowns or interruptions, it can now be restarted using ` [BCOVPlaybackController resumeVideoAtTime:withAutoPlay:]`. Previously, only streams without OnceUX or FairPlay could be restarted.

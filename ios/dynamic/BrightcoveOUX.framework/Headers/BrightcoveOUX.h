@@ -1,6 +1,6 @@
 //
 // BrightcoveOUX.h
-// BrightcoveOUX
+// Brightcove-Player-SDK-OUX
 //
 // Copyright (c) 2016 Brightcove, Inc. All rights reserved.
 // License: https://accounts.brightcove.com/en/terms-and-conditions
