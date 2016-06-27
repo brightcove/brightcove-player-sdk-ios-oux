@@ -37,11 +37,19 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The designated initializer.
  *
+ * @param companionSlots An array of BCOVOUXCompanionSlots to be populated.
+ * @return An initialized instance.
+ */
+- (nullable instancetype)initWithCompanionSlots:(NSArray *)companionSlots NS_DESIGNATED_INITIALIZER;
+
+/**
+ * The designated initializer.
+ *
  * @param adComponentContainer The view to display the ad UI.
  * @param companionSlots An array of BCOVOUXCompanionSlots to be populated.
  * @return An initialized instance.
  */
-- (nullable instancetype)initWithAdComponentContainer:(UIView *)adComponentContainer companionSlots:(NSArray *)companionSlots NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithAdComponentContainer:(UIView *)adComponentContainer companionSlots:(NSArray *)companionSlots __attribute__((deprecated("Use -initWithCompanionSlots: instead")));
 
 /**
  * The delegate for the BCOVOUXAdComponentDisplayContainer.

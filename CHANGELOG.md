@@ -1,3 +1,12 @@
+# 2.1.0
+### Additions and Improvements
+
+* Internal improvements to support ad controls in the Brightcove PlayerUI.
+* Support for disabling ads while seeking forward. Refer to README.md for details.
+
+### Breaking Changes
+* You must use the Brightcove Player SDK for iOS version 5.1 or higher.
+
 # 2.0.6
 ### Additions and Improvements
 * Support for VMAP 1.0.1 format ad responses. The Brightcove OnceUX plugin now supports both VMAP 1.0 and VMAP 1.0.1 ad response formats.

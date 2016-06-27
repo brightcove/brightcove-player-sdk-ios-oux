@@ -1,4 +1,4 @@
-# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 2.0.6.212
+# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 2.1.0.227
 
 Supported Platforms
 ===================
@@ -100,10 +100,46 @@ The `completionHandler` will execute at the completion of a successful seek. It 
 
 [oux_extensions]: https://github.com/brightcove/brightcove-player-sdk-ios-oux/blob/master/ios/static/BrightcoveOUX.framework/Headers/BCOVOUXComponent.h
 
+Seeking With Ads Disabled
+=========================
+
+The BrightcovePlayerSDK provides a BOOL property for disabling ads while seeking. The intended use by OnceUX is to allow an application to resume video playback after relaunching without requiring the end-user to view ads they've already seen.
+
+It is recommended that ad-disabling logic be added to the `kBCOVPlaybackSessionLifecycleEventReady` handler of the `-playbackController:playbackSession:didReceiveLifecycleEvent:` method of your `BCOVPlaybackController` delegate.
+
+	if ([kBCOVPlaybackSessionLifecycleEventReady isEqualToString:lifecycleEvent.eventType])
+	{
+		// disable ads.
+		_playbackController.adsDisabled = YES;
+
+		// seek somewhere into the video content.
+		[_playbackController seekToTime:resumeTime completionHandler:^(BOOL finished)
+		{
+			// re-enable ads.
+			_playbackController.adsDisabled = NO;
+
+			// open the shutter.
+			_playbackController.shutterFadeTime = 0.25;
+			_playbackController.shutter = NO;
+		}];
+	}
+
+When calling `[BCOVPlaybackController seekTo:completion:]` to resume playback at a particular time, the first frame of the video will be visible until the seek completes. For a cleaner presentation, set the BOOL `shutter` property of BCOVPlabackController to `YES` before calling `-setVideos:`. When seeking is complete, dismiss the shutter by setting the `shutter` property to `NO`. The `shutterFadeTime` property defines the duration of the shutter fade animation.
+
+	self.playbackController = [sdkManager createOUXPlaybackControllerWithViewStrategy:[sdkManager BCOVOUXdefaultControlsViewStrategy]];
+
+	// resuming playback so activate the shutter before loading video.
+	self.playbackController.shutterFadeTime = 0.0;
+	self.playbackController.shutter = YES;
+
+	NSArray *videos = @[[self videoWithURL: [NSURL URLWithString:onceUxUrl]]];
+	[self.playbackController setVideos:videos];
+
+
 Known Issues
 ==========================
 
-* You can not use BrightcoveOUX with any other Brightcove plugins except for the BrightcoveFairPlay plugin.
+* You cannot use BrightcoveOUX with any other Brightcove plugins except for the BrightcoveFairPlay plugin.
 
 * The plugin currently does not support playing back OnceUX content and non OnceUX content in the same playback controller. If you need to play both, you will need to create a separate playback controller for this content.
 

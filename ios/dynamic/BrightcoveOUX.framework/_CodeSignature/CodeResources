@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/BCOVOUXAdComponentDisplayContainer.h</key>
 		<data>
-		ffG+gVQ3H0BNrBtrXsditMbJ5Eo=
+		1ZtF2Va15UrGfRsSsPsDdjp9y0k=
 		</data>
 		<key>Headers/BCOVOUXCompanionSlot.h</key>
 		<data>
@@ -22,11 +22,11 @@
 		</data>
 		<key>Headers/BrightcoveOUX.h</key>
 		<data>
-		tv5irAcJty0DQbKIyETXutdPal4=
+		Q5rggODngdn/0fE7QNEfQb//22U=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		pYsbB3+eKCwENFXOxygT4Oo5HkQ=
+		XPAlyGQto7nLh7pgdeqpd/Y8MxM=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -39,11 +39,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			ffG+gVQ3H0BNrBtrXsditMbJ5Eo=
+			1ZtF2Va15UrGfRsSsPsDdjp9y0k=
 			</data>
 			<key>hash2</key>
 			<data>
-			1gncKMFUo1trSWcZCFm4Y2E+4LgmmPXIC/UXxfzBhp4=
+			YjmKRLKL/nRdg+jHNRM/BSt9b7tWW0nCIjGxZBg2luo=
 			</data>
 		</dict>
 		<key>Headers/BCOVOUXCompanionSlot.h</key>
@@ -83,11 +83,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			tv5irAcJty0DQbKIyETXutdPal4=
+			Q5rggODngdn/0fE7QNEfQb//22U=
 			</data>
 			<key>hash2</key>
 			<data>
-			lDV9ZAx8UeoZaYgZ78rnzSzA3sI88qav27QwQS7LtJQ=
+			wuQUhHgFgTWnyHZcVitTHBKQI9DiMlYG0w+/uN0P3zk=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
