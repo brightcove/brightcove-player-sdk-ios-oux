@@ -44,7 +44,7 @@
 					<div class="section section-overview index-overview">
 						
 						
-						<h1>Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 2.1.0.227</h1>
+						<h1>Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 2.1.1.238</h1>
 
 <h1>Supported Platforms</h1>
 
@@ -91,28 +91,29 @@
 
 <p>BrightcoveOUX is a plugin for <a href="https://github.com/brightcove/brightcove-player-sdk-ios">Brightcove Player SDK for iOS</a> that provides support for Brightcove OnceUX server side ad stitching. Its use is relatively straightforward.</p>
 
-<pre><code>[1] BCOVOUXAdComponentDisplayContainer *displayContainer = [[BCOVOUXAdComponentDisplayContainer alloc] initWithAdComponentContainer:self.videoContainer companionSlots:nil];
+<pre><code>[1] BCOVOUXAdComponentDisplayContainer *displayContainer = [[BCOVOUXAdComponentDisplayContainer alloc] initWithCompanionSlots:@[]];
 
     BCOVPlayerSDKManager *manager = [BCOVPlayerSDKManager sharedManager];
-[2] id&lt;BCOVPlaybackController&gt; controller = [manager createOUXPlaybackControllerWithViewStrategy:[manager BCOVOUXdefaultControlsViewStrategy]];
-    controller.delegate = self;
-[3] [controller addSessionConsumer:displayContainer];
 
-[4] [self.videoContainer addSubview:controller.view];
+[2] id&lt;BCOVPlaybackController&gt; playbackController = [sdkManager createOUXPlaybackControllerWithViewStrategy:nil];
+
+[3] [playbackController addSessionConsumer:displayContainer];
+
+[4] [self.videoContainer addSubview:playbackController.view];
 
 [5] BCOVVideo *video = [BCOVVideo videoWithURL:[NSURL URLWithString:&lt;url-to-once-ux-video&gt;]];
-[6] [controller setVideos:@[ video ]];
-    [controller play];
+[6] [playbackController setVideos:@[ video ]];
+    [playbackController play];
 </code></pre>
 
 <p>Let&rsquo;s break this code down into steps, to make it a bit simpler to digest:</p>
 
 <ol>
-<li>First you will want to create an BCOVOUXAdComponentDisplayContainer. This object will provide the ad UI and help manage any companion slots. Pass in the view you want the ad UI to show up in and any companion slots that you have, if any.</li>
-<li>BCOVOUX adds some category methods to BCOVPlaybackManager. The first of these is <code>-createOUXPlaybackControllerWithViewStrategy:</code>. Use this method to create your playback controller.</li>
-<li>In order for the BCOVOUXAdComponentDisplayContainer to display ad information and populate companion ad views, it must be added as a session consumer.</li>
-<li>Add the playback controller&rsquo;s view to your video container. This will probably be the same view you used in step 1.</li>
-<li>Create a BCOVVideo using the URL to your OnceUX VMAP document.</li>
+<li>First create a <code>BCOVOUXAdComponentDisplayContainer</code>. This object will help manage companion slots. Pass in the companion slots that you have, if any.</li>
+<li>BrightcoveOUX adds some category methods to <code>BCOVPlaybackManager</code>. The first of these is <code>-createOUXPlaybackControllerWithViewStrategy:</code>. Use this method to create your playback controller. You will typically pass <code>nil</code> for the view strategy.</li>
+<li>In order for the <code>BCOVOUXAdComponentDisplayContainer</code> to display ad information and populate companion ad views, it must be added as a session consumer.</li>
+<li>Add the playback controller&rsquo;s view to the video container in your own view hierarchy.</li>
+<li>Create a <code>BCOVVideo</code> using the URL to your OnceUX video.</li>
 <li>Load the video into the playback controller.</li>
 </ol>
 
@@ -148,14 +149,18 @@
 
 <p>It is recommended that ad-disabling logic be added to the <code>kBCOVPlaybackSessionLifecycleEventReady</code> handler of the <code>-playbackController:playbackSession:didReceiveLifecycleEvent:</code> method of your <code>BCOVPlaybackController</code> delegate.</p>
 
-<pre><code>if ([kBCOVPlaybackSessionLifecycleEventReady isEqualToString:lifecycleEvent.eventType])
-{
-    // disable ads.
-    _playbackController.adsDisabled = YES;
-
-    // seek somewhere into the video content.
-    [_playbackController seekToTime:resumeTime completionHandler:^(BOOL finished)
+<pre><code>- (void)playbackController:(id&lt;BCOVPlaybackController&gt;)controller
+           playbackSession:(id&lt;BCOVPlaybackSession&gt;)session
+  didReceiveLifecycleEvent:(BCOVPlaybackSessionLifecycleEvent *)lifecycleEvent
+  {
+    if ([kBCOVPlaybackSessionLifecycleEventReady isEqualToString:lifecycleEvent.eventType])
     {
+      // disable ads.
+      _playbackController.adsDisabled = YES;
+
+      // seek somewhere into the video content.
+      [session.providerExtension oux_seekToTime:resumeTime completionHandler:^(BOOL finished)
+      {
         // re-enable ads.
         _playbackController.adsDisabled = NO;
 
@@ -163,10 +168,10 @@
         _playbackController.shutterFadeTime = 0.25;
         _playbackController.shutter = NO;
     }];
-}
+  }
 </code></pre>
 
-<p>When calling <code>[BCOVPlaybackController seekTo:completion:]</code> to resume playback at a particular time, the first frame of the video will be visible until the seek completes. For a cleaner presentation, set the BOOL <code>shutter</code> property of BCOVPlabackController to <code>YES</code> before calling <code>-setVideos:</code>. When seeking is complete, dismiss the shutter by setting the <code>shutter</code> property to <code>NO</code>. The <code>shutterFadeTime</code> property defines the duration of the shutter fade animation.</p>
+<p>When calling <code>oux_seekTo:completion:</code> to resume playback at a particular time, the first frame of the video will be visible until the seek completes. For a cleaner presentation, temporarily cover the video view during seeking by setting the BOOL <code>shutter</code> property of BCOVPlabackController to <code>YES</code> before calling <code>-setVideos:</code>. When seeking is complete, dismiss the shutter by setting the <code>shutter</code> property to <code>NO</code>. The <code>shutterFadeTime</code> property defines the duration of the shutter fade animation.</p>
 
 <pre><code>self.playbackController = [sdkManager createOUXPlaybackControllerWithViewStrategy:[sdkManager BCOVOUXdefaultControlsViewStrategy]];
 
@@ -177,6 +182,49 @@ self.playbackController.shutter = YES;
 NSArray *videos = @[[self videoWithURL: [NSURL URLWithString:onceUxUrl]]];
 [self.playbackController setVideos:videos];
 </code></pre>
+
+<h1>Player UI Built-In Controls</h1>
+
+<p>The BrightcovePlayerSDK provides a built-in set of UI controls that can be used with the OnceUX plugin for both basic playback and ad controls. To use the controls, create a <code>BCOVPUIPlayerView</code>, and associate it with your OnceUX playback controller.</p>
+
+<p>First, create a playerView property in your class.</p>
+
+<pre><code> @property (nonatomic) BCOVPUIPlayerView *playerView;
+</code></pre>
+
+<p>Create the <code>BCOVPUIPlayerView</code> instance and save a reference to the object. Set its frame to match your container view, then add the player view to the container view in your view hierarchy. Note that <code>videoContainer</code> is your own view object in your app&rsquo;s layout.</p>
+
+<pre><code> BCOVPUIBasicControlView *controlView = [BCOVPUIBasicControlView basicControlViewWithVODLayout];
+ self.playerView = [[BCOVPUIPlayerView alloc] initWithPlaybackController:nil options:nil controlsView:controlView];
+ self.playerView.frame = self.videoContainer.bounds;
+ self.playerView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+
+ // Insert the playerView into your own video view.
+ [self.videoContainer addSubview:self.playerView];
+</code></pre>
+
+<p>Now create the <code>BCOVPlaybackController</code>, assign it to your player view, and then start playing videos.</p>
+
+<pre><code>// Initialize companion slots
+BCOVOUXAdComponentDisplayContainer *displayContainer = [[BCOVOUXAdComponentDisplayContainer alloc] initWithCompanionSlots:@[]];
+
+// Create the playback controller
+BCOVPlayerSDKManager *manager = [BCOVPlayerSDKManager sharedManager];
+id&lt;BCOVPlaybackController&gt; playbackController = [sdkManager createOUXPlaybackControllerWithViewStrategy:nil];
+
+// Listen for display/companion ad messages
+[playbackController addSessionConsumer:displayContainer];
+
+// Tell the player view this is the playback controller we're using
+self.playerView.playbackController = playbackController;
+
+// Create and play your video
+BCOVVideo *video = [BCOVVideo videoWithURL:[NSURL URLWithString:&lt;url-to-once-ux-video&gt;]];
+[playbackController setVideos:@[ video ]];
+[playbackController play];
+</code></pre>
+
+<p>See the README in the BrightcovePlayerSDK for more details about how to use and customize the PlayerUI controls.</p>
 
 <h1>Known Issues</h1>
 
@@ -238,7 +286,7 @@ NSArray *videos = @[[self videoWithURL: [NSURL URLWithString:onceUxUrl]]];
 					<footer>
 						<div class="footer-copyright">
 							
-							<p class="copyright">Copyright &copy; 2016 Brightcove. All rights reserved. Updated: 2016-06-14</p>
+							<p class="copyright">Copyright &copy; 2016 Brightcove. All rights reserved. Updated: 2016-07-27</p>
 							
 							
 							<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>

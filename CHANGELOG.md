@@ -1,3 +1,8 @@
+# 2.1.1
+### Additions and Improvements
+* Deprecated `[BCOVPlayerSDKManager BCOVOUXdefaultControlsViewStrategy]`. Use the PlayerUI controls instead. See the README for full details.
+* Internal improvements.
+
 # 2.1.0
 ### Additions and Improvements
 

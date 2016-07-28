@@ -45,6 +45,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The designated initializer.
  *
+ * *** DEPRECATED ***
+ * Use -[BCOVOUXAdComponentDisplayContainer initWithCompanionSlots:] instead
+ *
  * @param adComponentContainer The view to display the ad UI.
  * @param companionSlots An array of BCOVOUXCompanionSlots to be populated.
  * @return An initialized instance.

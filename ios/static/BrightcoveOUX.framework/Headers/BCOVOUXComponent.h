@@ -48,9 +48,13 @@ NS_ASSUME_NONNULL_BEGIN
  * This view strategy is intended to provide a "stock" set of controls to aide
  * development, testing, and Brightcove code samples.
  *
+ * *** DEPRECATED ***
+ * Use the built-in BrightcovePlayerSDK's PlayerUI controls instead.
+ * See the BrightcovePlayerSDK README for details.
+ *
  * @return A view strategy block that wraps the video view with stock controls.
  */
-- (BCOVPlaybackControllerViewStrategy)BCOVOUXdefaultControlsViewStrategy;
+- (BCOVPlaybackControllerViewStrategy)BCOVOUXdefaultControlsViewStrategy __attribute__((deprecated("Use the built-in BrightcovePlayerSDK's PlayerUI controls instead; see the BrightcovePlayerSDK README for details")));
 
 @end
 
