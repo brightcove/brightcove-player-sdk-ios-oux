@@ -21,7 +21,16 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BCOVPlayerSDKManager (BCOVOUXAdditions)
 
 /**
- * Creates and returns a new playback controller with the specified view
+ * Creates and returns a new playback controller.
+ * The returned playback controller will be configured with a
+ * BCOVOUX session provider.
+ *
+ * @return A new playback controller with the specified parameters.
+ */
+- (id<BCOVPlaybackController>)createOUXPlaybackController;
+
+/**
+ * Creates and returns a new OnceUX playback controller with the specified view
  * strategy. The returned playback controller will be configured with a
  * BCOVOUX session provider.
  *
@@ -41,6 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (id<BCOVPlaybackSessionProvider>)createOUXSessionProviderWithUpstreamSessionProvider:(nullable id<BCOVPlaybackSessionProvider>)provider;
 
 
+#if !TARGET_OS_TV
 /**
  * Returns a view strategy that wraps the video view it is given with the
  * default playback controls.
@@ -55,6 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @return A view strategy block that wraps the video view with stock controls.
  */
 - (BCOVPlaybackControllerViewStrategy)BCOVOUXdefaultControlsViewStrategy __attribute__((deprecated("Use the built-in BrightcovePlayerSDK's PlayerUI controls instead; see the BrightcovePlayerSDK README for details")));
+#endif
 
 @end
 
@@ -91,6 +102,39 @@ NS_ASSUME_NONNULL_BEGIN
  * @param completionHandler The block to execute when the seek is performed
  */
 - (void)oux_seekToTime:(CMTime)time completionHandler:(void (^)(BOOL finished))completionHandler;
+
+/**
+ * Returns the absolute time that corresponds to the specified content time.
+ *
+ * This method is used to obtain an absolute stream time that corresponds to
+ * a time that is relative to the content. For example, the stream may include
+ * a thirty-second ad sequence at `kCMTimeZero`, after which the content begins.
+ * In this case, a content time of zero would correspond to an absolute stream
+ * time of thirty seconds, and a content time of 2:00 would correspond to an
+ * absolute stream time of 2:30 (assuming no other ad sequences occur before
+ * that time).
+ *
+ * @param contentTime A time offset into the video content.
+ * @return The absolute time that corresponds to the specified content time.
+ */
+- (CMTime)oux_absoluteTimeAtContentTime:(CMTime)contentTime;
+
+/**
+ * Returns the content time that corresponds to the specified absolute time.
+ *
+ * This method is used to obtain a content stream time that corresponds to a
+ * time that is relative to the payload. For example, the stream may include
+ * a thirty-second ad sequence at 1:30, after which the content begins.
+ *
+ * In this case, a content time of zero would correspond to an absolute stream
+ * time of zero, a content time of 2:00 would correspond to an
+ * absolute stream time of 2:30, and a content time of 1:30 would correspond to
+ * any absolute stream time from 1:30 to 2:00.
+ *
+ * @param absoluteTime A time offset into the video payload.
+ * @return The content time that corresponds to the specified absolute time.
+ */
+- (CMTime)oux_contentTimeAtAbsoluteTime:(CMTime)absoluteTime;
 
 @end
 

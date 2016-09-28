@@ -66,6 +66,10 @@
 	
 	<optgroup label="Instance Methods">
 		
+		<option value="//api/name/oux_absoluteTimeAtContentTime:">- oux_absoluteTimeAtContentTime:</option>
+		
+		<option value="//api/name/oux_contentTimeAtAbsoluteTime:">- oux_contentTimeAtAbsoluteTime:</option>
+		
 		<option value="//api/name/oux_seekToTime:completionHandler:">- oux_seekToTime:completionHandler:</option>
 		
 	</optgroup>
@@ -247,6 +251,149 @@ where the seek had attempted to seek to.</li>
 			
 		</div>
 	</div>
+</div><div class="section-method">
+	<a name="//api/name/oux_absoluteTimeAtContentTime:" title="oux_absoluteTimeAtContentTime:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/oux_absoluteTimeAtContentTime:">&ndash;&nbsp;oux_absoluteTimeAtContentTime:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the absolute time that corresponds to the specified content time.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (CMTime)oux_absoluteTimeAtContentTime:(CMTime)<em>contentTime</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>contentTime</code></th>
+						<td><p>A time offset into the video content.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The absolute time that corresponds to the specified content time.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Returns the absolute time that corresponds to the specified content time.</p>
+
+<p>This method is used to obtain an absolute stream time that corresponds to
+a time that is relative to the content. For example, the stream may include
+a thirty-second ad sequence at <code>kCMTimeZero</code>, after which the content begins.
+In this case, a content time of zero would correspond to an absolute stream
+time of thirty seconds, and a content time of 2:00 would correspond to an
+absolute stream time of 2:30 (assuming no other ad sequences occur before
+that time).</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BCOVOUXComponent.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/oux_contentTimeAtAbsoluteTime:" title="oux_contentTimeAtAbsoluteTime:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/oux_contentTimeAtAbsoluteTime:">&ndash;&nbsp;oux_contentTimeAtAbsoluteTime:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>Returns the content time that corresponds to the specified absolute time.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (CMTime)oux_contentTimeAtAbsoluteTime:(CMTime)<em>absoluteTime</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>absoluteTime</code></th>
+						<td><p>A time offset into the video payload.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>The content time that corresponds to the specified absolute time.</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>Returns the content time that corresponds to the specified absolute time.</p>
+
+<p>This method is used to obtain a content stream time that corresponds to a
+time that is relative to the payload. For example, the stream may include
+a thirty-second ad sequence at 1:30, after which the content begins.</p>
+
+<p>In this case, a content time of zero would correspond to an absolute stream
+time of zero, a content time of 2:00 would correspond to an
+absolute stream time of 2:30, and a content time of 1:30 would correspond to
+any absolute stream time from 1:30 to 2:00.</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">BCOVOUXComponent.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
 </div>
 						</div>
 						
@@ -262,7 +409,7 @@ where the seek had attempted to seek to.</li>
 				<footer>
 					<div class="footer-copyright">
 						
-						<p class="copyright">Copyright &copy; 2016 Brightcove. All rights reserved. Updated: 2016-07-27</p>
+						<p class="copyright">Copyright &copy; 2016 Brightcove. All rights reserved. Updated: 2016-09-28</p>
 						
 						
 						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>

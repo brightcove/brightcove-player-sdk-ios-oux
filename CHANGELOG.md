@@ -1,3 +1,10 @@
+#2.1.2
+### Additions and Improvements
+* This release adds a dynamic framework that supports tvOS.
+* `- (id<BCOVPlaybackController>)createOUXPlaybackController` was added to the `BCOVPlayerSDKManager (BCOVOUXAdditions)` category.
+* `- (CMTime)oux_absoluteTimeAtContentTime:(CMTime)contentTime` and `- (CMTime)oux_contentTimeAtAbsoluteTime:(CMTime)absoluteTime` were added to the `BCOVPlayerSDKManager (BCOVOUXAdditions)` category. These methods allow you to convert back and forth between the absolute time (CMTime of the physical video stream including ads) and the content time (CMTime of the logical video stream without ads).
+* Fixes an issue where extra `...didEnterAdSequence...` and `...didExitAdSequence...` delegate methods would be called after seeking over midroll ads.
+
 # 2.1.1
 ### Additions and Improvements
 * Deprecated `[BCOVPlayerSDKManager BCOVOUXdefaultControlsViewStrategy]`. Use the PlayerUI controls instead. See the README for full details.
