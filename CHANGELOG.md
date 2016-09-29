@@ -1,3 +1,7 @@
+#2.1.3
+### Additions and Improvements
+* Fixed a problem with installing the tvOS version of the OnceUX framework with CocoaPods.
+
 #2.1.2
 ### Additions and Improvements
 * This release adds a dynamic framework that supports tvOS.
