@@ -1,3 +1,7 @@
+#2.1.4
+### Additions and Improvements
+* Fixed a problem where taps on the Learn More button would only report the first ClickTracking URL if there were multiple ClickTracking elements in the VideoClicks VAST element.
+
 #2.1.3
 ### Additions and Improvements
 * Fixed a problem with installing the tvOS version of the OnceUX framework with CocoaPods.
