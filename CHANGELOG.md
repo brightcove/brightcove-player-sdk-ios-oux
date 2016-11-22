@@ -1,14 +1,18 @@
+#2.1.6
+### Additions and Improvements
+* The podspec now supports version 5.2 of the Brightcove Player SDK for iOS.
+
 #2.1.5
 ### Additions and Improvements
-* Fixed a problem with installing the tvOS version of the OnceUX framework using CocoaPods.
+* Fixes a problem with installing the tvOS version of the OnceUX framework using CocoaPods.
 
 #2.1.4
 ### Additions and Improvements
-* Fixed a problem where taps on the Learn More button would only report the first ClickTracking URL if there were multiple ClickTracking elements in the VideoClicks VAST element.
+* Fixes a problem where taps on the Learn More button would only report the first ClickTracking URL if there were multiple ClickTracking elements in the VideoClicks VAST element.
 
 #2.1.3
 ### Additions and Improvements
-* Fixed a problem with installing the tvOS version of the OnceUX framework with CocoaPods.
+* Fixes a problem with installing the tvOS version of the OnceUX framework with CocoaPods.
 
 #2.1.2
 ### Additions and Improvements

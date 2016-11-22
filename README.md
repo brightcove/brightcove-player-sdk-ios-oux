@@ -1,17 +1,19 @@
-# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 2.1.5.258
+# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 2.1.6.262
 
 Supported Platforms
 ===================
-iOS 7.0 and above.
+iOS 8.0 and above.
+
+tvOS 9.0 and above.
 
 Installation
 ============
-The Brightcove OnceUX for Brightcove Player SDK provides two installation packages for iOS, a static library framework and a dynamic framework. The static library target supports deployment on iOS 7 while the dynamic framework only supports iOS 8 and above.
+The Brightcove OnceUX for Brightcove Player SDK provides two installation packages for iOS, a static library framework and a dynamic framework.
 
 CocoaPods
 --------------
 
-You can use [Cocoapods][cocoapods] to add the OUX Plugin for Brightcove Player SDK to your project.  You can find the latest `Brightcove-Player-SDK-OUX` podspec [here][podspecs].
+You can use [CocoaPods][cocoapods] to add the OUX Plugin for Brightcove Player SDK to your project.  You can find the latest `Brightcove-Player-SDK-OUX` podspec [here][podspecs].
 
 Static Framework example:
 
@@ -31,7 +33,7 @@ To add the OUX Plugin for Brightcove Player SDK to your project manually:
 3. Add `BrightcoveOUX.framework` to your project.
 4. On the "Build Settings" tab of your application target, ensure that the "Framework Search Paths" include the path to the framework. This should have been done automatically unless the framework is stored under a different root directory than your project.
 5. (Dynamic Framework only) On the "General" tab of your application target, add 'BrightcoveOUX.framework' to the "Embedded Binary" section.
-6. (Dynamic Framework only) On the "Build Phases" tab, add a "Run Script" phase with the command `bash ${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/BrightcoveOUX.framework/strip-frameworks.sh`. Check "Run script only when installing". This will remove unneeded architectures from the build, which is important for App Store submission. ([rdar://19209161][19209161])
+6. (Dynamic Framework only) On the "Build Phases" tab, add a "Run Script" phase with the command `bash ${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/BrightcoveOUX.framework/strip-frameworks.sh`. Check "Run script only when installing". This will remove unneeded architectures from the build, which is important for App Store submission.
 7. (Static Framework only) On the "Build Settings" tab of your application target, add `-ObjC` to the "Other Linker Flags" build setting.
 
 Imports
