@@ -1,4 +1,4 @@
-# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 2.1.6.262
+# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 2.1.7.267
 
 Supported Platforms
 ===================
@@ -41,7 +41,7 @@ Imports
 The OUX Plugin for Brightcove Player SDK for iOS can be imported into code a few different ways; `@import BrightcoveOUX;`, `#import <BrightcoveOUX/BrightcoveOUX.h>` or `#import <BrightcoveOUX/[specific class].h>`.
 
 [cocoapods]: http://cocoapods.org
-[podspecs]: https://github.com/CocoaPods/Specs/tree/master/Specs/Brightcove-Player-SDK-OUX
+[podspecs]: https://github.com/CocoaPods/Specs/tree/master/Specs/5/8/0/Brightcove-Player-SDK-OUX
 [release]: https://github.com/brightcove/brightcove-player-sdk-ios-oux/releases
 
 Quick Start
