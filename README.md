@@ -1,4 +1,4 @@
-# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 2.1.7.267
+# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 2.1.8.272
 
 Supported Platforms
 ===================
@@ -23,6 +23,12 @@ Dynamic Framework example:
 
     pod 'Brightcove-Player-SDK-OUX/dynamic'
     
+Maintaining an up-to-date master podspec repo is necessary to ensure that you are always using the latest versions of Brightcove software. As of CocoaPods 1.0.0, podspec repo updates are no longer an automatic feature, so to update your master repo, run the following on the command line:
+
+```
+pod repo update
+```
+
 Manual
 --------------
 
@@ -71,7 +77,7 @@ Let's break this code down into steps, to make it a bit simpler to digest:
 1. Create a `BCOVVideo` using the URL to your OnceUX video.
 1. Load the video into the playback controller.
 
-If you have questions or need help, we have a support forum for Brightcove's native Player SDKs at [https://groups.google.com/forum/#!forum/brightcove-native-player-sdks][forum] .
+If you have questions or need help, visit the support forum for Brightcove Native Player SDKs at [https://groups.google.com/forum/#!forum/brightcove-native-player-sdks][forum] .
 
 [forum]: https://groups.google.com/forum/#!forum/brightcove-native-player-sdks
 
@@ -99,7 +105,7 @@ The BrightcoveOUX plugin provides a seeking function that should be used when im
     
     }];
     
-The `completionHandler` will execute at the completion of a successful seek. It will not execute if a seek was already initiated by a previous call to `-[BCOVSessionProviderExtension oux_seekToTime:completionHandler:]` or if an ad is playing back. To test whether a see attempt can be made, check the `-[BCOVSessionProviderExtension oux_canSeek]` property. For more information on both of these methods, be sure to read their [headerdoc][oux_extensions].
+The `completionHandler` will execute at the completion of a successful seek. It will not execute if a seek was already initiated by a previous call to `-[BCOVSessionProviderExtension oux_seekToTime:completionHandler:]` or if an ad is playing back. To test whether a see attempt can be made, check the `-[BCOVSessionProviderExtension oux_canSeek]` property. For more information on both of these methods, be sure to read the [headerdoc][oux_extensions].
 
 [oux_extensions]: https://github.com/brightcove/brightcove-player-sdk-ios-oux/blob/master/ios/static/BrightcoveOUX.framework/Headers/BCOVOUXComponent.h
 

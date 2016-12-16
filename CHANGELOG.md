@@ -1,3 +1,7 @@
+# 2.1.8
+### Additions and Improvements
+* The podspec now supports version 5.3 of the Brightcove Player SDK for iOS.
+
 #2.1.7
 ### Additions and Improvements
 * Provides a workaround to an AVPlayer issue where playing back some OnceUX streams would result in extraneous ad enter/exit events.
