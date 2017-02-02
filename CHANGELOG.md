@@ -1,3 +1,7 @@
+# 2.1.9
+### Additions and Improvements
+* Fixes a problem where Ad Start event beacons were not being sent. 
+
 # 2.1.8
 ### Additions and Improvements
 * The podspec now supports version 5.3 of the Brightcove Player SDK for iOS.
