@@ -29,3 +29,77 @@ extern NSString * const kBCOVOUXLifecycleErrorEvent;
  * when the eventType is `kBCOVOUXLifecycleErrorEvent`.
  */
 extern NSString * const kBCOVOUXLifecycleEventPropertiesKeyError;
+
+/**
+ * XML elements are sometimes represented as NSDictionary objects. The NSDictionary
+ * contains the XML element start tag (NSString), attributes (NSDictionary) and
+ * content. When the element is a leaf node, the content is the element text
+ * (NSString). When the element contains one or more child elements, the content
+ * is an an array (NSArray) of XML elements (NSDictionary objects).
+ *
+ * Using the following XML snippet - a hypothetical VAST ad extension - as an
+ * example:
+ *
+ * <Extensions>
+ *   <Extension type="Freelance">
+ *     <parameters>
+ *       <parameter name="mope"><![CDATA[375613;g669038;17566919]]</parameter>
+ *       <parameter name="lmno_parameters"><![CDATA[8968;OldMacDonalds]]</parameter>
+ *     </parameters>
+ *   </Extension>
+ * </Extensions>
+ *
+ * The following structure is generated where ( and ) indicate an NSArray and
+ * { and } indicate an NSDictionary, as would be seen when logging the
+ * description of each class.
+ *
+ * (
+ *   {
+ *     "tag" = Extension;
+ *     "attributes" = { type = "Freelance" }
+ *     "content" =
+ *     (
+ *       {
+ *         "tag" = parameters;
+ *         "attributes" = {};
+ *         "content" =
+ *         (
+ *           {
+ *             "tag" = parameter;
+ *             "attributes" = { name = mope; };
+ *             "content" = "375613;g669038;17566919";
+ *           },
+ *           {
+ *             "tag" = parameter;
+ *             "attributes" = { name = "lmno_parameters"; };
+ *             "content" = "8968;OldMacDonalds";
+ *           }
+ *         );
+ *       }
+ *     );
+ *   }
+ * )
+ *
+ * https://www.w3schools.com/xml/xml_elements.asp
+ *
+ */
+extern NSString * const kBCOVXMLElementTagKey;
+extern NSString * const kBCOVXMLElementAttributesKey;
+extern NSString * const kBCOVXMLElementContentKey;
+
+/**
+ * When a VAST ad contains VAST Ad Extensions (plural), the list of Extension
+ * (singular) XML elements is stored in the properties NSDictionary of the
+ * BCOVAd object passed to the BCOVPlaybackControllerAdsDelegate methods. For
+ * example:
+ *
+ * - (void)playbackController:(id<BCOVPlaybackController>)controller
+ *            playbackSession:(id<BCOVPlaybackSession>)session
+ *                 didEnterAd:(BCOVAd *)ad
+ * {
+ *   NSArray *vastAdExtrensions = ad.properties[kBCOVVASTAdExtensionsKey];
+ *
+ * ad.properties[kBCOVVASTAdExtensionsKey] will be nil when the VAST ad did not
+ * contain Extensions.
+ */
+extern NSString * const kBCOVOUXVASTAdExtensionsKey;

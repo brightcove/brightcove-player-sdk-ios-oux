@@ -1,3 +1,7 @@
+# 2.1.10
+### Additions and Improvements
+* Expose VAST Ad Extensions. Refer to the comments in the BCOVOUXConstants.h header file in the BrightcoveOUX framework for usage details.
+
 # 2.1.9
 ### Additions and Improvements
 * Fixes a problem where Ad Start event beacons were not being sent. 
