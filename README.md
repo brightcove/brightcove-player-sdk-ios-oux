@@ -1,4 +1,4 @@
-# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 2.1.10.284
+# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 6.0.1.72
 
 Supported Platforms
 ===================
@@ -13,15 +13,23 @@ The Brightcove OnceUX for Brightcove Player SDK provides two installation packag
 CocoaPods
 --------------
 
-You can use [CocoaPods][cocoapods] to add the OUX Plugin for Brightcove Player SDK to your project.  You can find the latest `Brightcove-Player-SDK-OUX` podspec [here][podspecs].
+You can use [CocoaPods][cocoapods] to add the OnceUX Plugin for Brightcove Player SDK to your project.  You can find the latest `Brightcove-Player-OnceUX` podspec [here][podspecs].
 
 Static Framework example:
 
-    pod 'Brightcove-Player-SDK-OUX'
+```
+source 'https://github.com/brightcove/BrightcoveSpecs.git'
+
+pod 'Brightcove-Player-OnceUX'
+```
     
 Dynamic Framework example:
 
-    pod 'Brightcove-Player-SDK-OUX/dynamic'
+```
+source 'https://github.com/brightcove/BrightcoveSpecs.git'
+
+pod 'Brightcove-Player-OnceUX/dynamic'
+```
     
 Maintaining an up-to-date master podspec repo is necessary to ensure that you are always using the latest versions of Brightcove software. As of CocoaPods 1.0.0, podspec repo updates are no longer an automatic feature, so to update your master repo, run the following on the command line:
 
@@ -38,7 +46,7 @@ To add the OUX Plugin for Brightcove Player SDK to your project manually:
 2. Download the latest zip'ed release of the BrightcoveOUX plugin from our [release page][release].
 3. Add `BrightcoveOUX.framework` to your project.
 4. On the "Build Settings" tab of your application target, ensure that the "Framework Search Paths" include the path to the framework. This should have been done automatically unless the framework is stored under a different root directory than your project.
-5. (Dynamic Framework only) On the "General" tab of your application target, add 'BrightcoveOUX.framework' to the "Embedded Binary" section.
+5. (Dynamic Framework only) On the "General" tab of your application target, add 'BrightcoveOUX.framework' to the "Embedded Binaries" section.
 6. (Dynamic Framework only) On the "Build Phases" tab, add a "Run Script" phase with the command `bash ${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/BrightcoveOUX.framework/strip-frameworks.sh`. Check "Run script only when installing". This will remove unneeded architectures from the build, which is important for App Store submission.
 7. (Static Framework only) On the "Build Settings" tab of your application target, add `-ObjC` to the "Other Linker Flags" build setting.
 
@@ -47,7 +55,7 @@ Imports
 The OUX Plugin for Brightcove Player SDK for iOS can be imported into code a few different ways; `@import BrightcoveOUX;`, `#import <BrightcoveOUX/BrightcoveOUX.h>` or `#import <BrightcoveOUX/[specific class].h>`.
 
 [cocoapods]: http://cocoapods.org
-[podspecs]: https://github.com/CocoaPods/Specs/tree/master/Specs/5/8/0/Brightcove-Player-SDK-OUX
+[podspecs]: https://github.com/brightcove/BrightcoveSpecs/tree/master/Brightcove-Player-OnceUX
 [release]: https://github.com/brightcove/brightcove-player-sdk-ios-oux/releases
 
 Quick Start
