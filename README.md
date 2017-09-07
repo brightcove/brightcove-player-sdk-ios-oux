@@ -1,4 +1,4 @@
-# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 6.0.5.119
+# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 6.0.6.129
 
 Supported Platforms
 ===================
@@ -30,12 +30,10 @@ source 'https://github.com/brightcove/BrightcoveSpecs.git'
 
 pod 'Brightcove-Player-OnceUX/dynamic'
 ```
-    
-Maintaining an up-to-date master podspec repo is necessary to ensure that you are always using the latest versions of Brightcove software. As of CocoaPods 1.0.0, podspec repo updates are no longer an automatic feature, so to update your master repo, run the following on the command line:
 
-```
-pod repo update
-```
+When updating your installation, it's a good idea to refresh the local copy of your BrightcoveSpecs repository so that you have the latest podspecs locally, just like you would update your CococaPods master repository.
+
+Typically if you use `pod update` in Terminal this will happen automatically, or alternatively you can update explicitly with `pod repo update brightcove`. (Your BrightcoveSpecs repository may have a different name if you explicitly added it to your list of podspecs repos.)
 
 Manual
 --------------
