@@ -50,7 +50,7 @@ extern NSString * const kBCOVOUXLifecycleEventPropertiesKeyError;
  * </Extensions>
  *
  * The following structure is generated where ( and ) indicate an NSArray and
- * { and } indicate an NSDictionary, as would be seen when logging the
+ * { and } indicate an NSDictionary, as would be seen when NSlog'ing the
  * description of each class.
  *
  * (
@@ -88,18 +88,21 @@ extern NSString * const kBCOVXMLElementAttributesKey;
 extern NSString * const kBCOVXMLElementContentKey;
 
 /**
- * When a VAST ad contains VAST Ad Extensions (plural), the list of Extension
+ * When a VAST ad contains, e.g., VAST ad Extensions (plural), the list of Extension
  * (singular) XML elements is stored in the properties NSDictionary of the
- * BCOVAd object passed to the BCOVPlaybackControllerAdsDelegate methods. For
- * example:
+ * BCOVAd object passed to the BCOVPlaybackControllerAdsDelegate methods. The same
+ * is true for VAST ad CreativeExtensions. As an example:
  *
  * - (void)playbackController:(id<BCOVPlaybackController>)controller
  *            playbackSession:(id<BCOVPlaybackSession>)session
  *                 didEnterAd:(BCOVAd *)ad
  * {
- *   NSArray *vastAdExtrensions = ad.properties[kBCOVVASTAdExtensionsKey];
+ *    NSArray *vastAdCreativeExtensions = ad.properties[kBCOVOUXVASTAdCreativeExtensionsKey];
+ *    NSArray *vastAdExtensions = ad.properties[kBCOVOUXVASTAdExtensionsKey];
  *
- * ad.properties[kBCOVVASTAdExtensionsKey] will be nil when the VAST ad did not
- * contain Extensions.
+ * ad.properties[kBCOVOUXVASTAdCreativeExtensionsKey] will be nil if the VAST ad does not
+ * contain CreativeExtensions. ad.properties[kBCOVOUXVASTAdExtensionsKey] will be nil
+ * if the VAST ad does not contain ad Extensions.
  */
+extern NSString * const kBCOVOUXVASTAdCreativeExtensionsKey;
 extern NSString * const kBCOVOUXVASTAdExtensionsKey;
