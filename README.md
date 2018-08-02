@@ -1,4 +1,4 @@
-# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 6.3.4.376
+# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 6.3.5.389
 
 Supported Platforms
 ===================
