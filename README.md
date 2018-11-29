@@ -1,4 +1,4 @@
-# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 6.3.10.441
+# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 6.3.11.455
 
 Supported Platforms
 ===================
@@ -163,15 +163,31 @@ First, create a playerView property in your class.
 
      @property (nonatomic) BCOVPUIPlayerView *playerView;
 
-Create the `BCOVPUIPlayerView` instance and save a reference to the object. Set its frame to match your container view, then add the player view to the container view in your view hierarchy. Note that `videoContainer` is your own view object in your app's layout.
+Create the `BCOVPUIPlayerView` instance and save a reference to the object.
 
      BCOVPUIBasicControlView *controlView = [BCOVPUIBasicControlView basicControlViewWithVODLayout];
      self.playerView = [[BCOVPUIPlayerView alloc] initWithPlaybackController:nil options:nil controlsView:controlView];
+     // Insert the playerView into your own video view.
+     [self.videoContainer addSubview:self.playerView];
+
+You'll need to set up the layout for the player view, you can do this with Auto Layout or the older Springs & Struts method. 
+
+**Springs & Struts**
+
+Set its frame to match your container view, then add the player view to the container view in your view hierarchy. Note that `videoContainer` is your own view object in your app's layout.
+
      self.playerView.frame = self.videoContainer.bounds;
      self.playerView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
-     // Insert the playerView into your own video view.
-     [self.videoContainer addSubview:self.playerView];
+**Auto Layout**
+
+    self.playerView.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint activateConstraints:@[
+                                              [self.playerView.topAnchor constraintEqualToAnchor:self.videoContainer.topAnchor],
+                                              [self.playerView.rightAnchor constraintEqualToAnchor:self.videoContainer.rightAnchor],
+                                              [self.playerView.leftAnchor constraintEqualToAnchor:self.videoContainer.leftAnchor],
+                                              [self.playerView.bottomAnchor constraintEqualToAnchor:self.videoContainer.bottomAnchor],
+                                              ]];
 
 Now create the `BCOVPlaybackController`, assign it to your player view, and then start playing videos.
 
