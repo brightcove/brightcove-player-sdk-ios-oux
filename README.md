@@ -1,8 +1,8 @@
-# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 6.3.11.455
+# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 6.4.0.501
 
 Supported Platforms
 ===================
-iOS 9.0 and above.
+iOS 10.0 and above.
 
 tvOS 9.0 and above.
 
@@ -151,7 +151,7 @@ When calling `oux_seekTo:completion:` to resume playback at a particular time, t
 	self.playbackController.shutterFadeTime = 0.0;
 	self.playbackController.shutter = YES;
 
-	NSArray *videos = @[[self videoWithURL: [NSURL URLWithString:onceUxUrl]]];
+	NSArray *videos = @[[BCOVVideo videoWithURL: [NSURL URLWithString:onceUxUrl]]];
 	[self.playbackController setVideos:videos];
 
 Player UI Built-In Controls
