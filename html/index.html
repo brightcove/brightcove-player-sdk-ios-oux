@@ -44,7 +44,11 @@
 					<div class="section section-overview index-overview">
 						
 						
-						<h1>Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 6.4.2.589</h1>
+						<h1>Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 6.4.3.616</h1>
+
+<h2>Deprecation Notice:</h2>
+
+<p>The OnceUX Plugin is being replaced by the SSAI Plugin for Brightcove Player SDK for iOS. All OnceUX features are available in SSAI. Refer to the &ldquo;Migrating OnceUX to SSAI&rdquo; section of this README for details on upgrading your application.</p>
 
 <h1>Supported Platforms</h1>
 
@@ -116,12 +120,12 @@ pod 'Brightcove-Player-OnceUX/dynamic'
     [playbackController play];
 </code></pre>
 
-<p>Let&rsquo;s break this code down into steps, to make it a bit simpler to digest:</p>
+<p>To summarize:</p>
 
 <ol>
-<li>First create a <code>BCOVOUXAdComponentDisplayContainer</code>. This object will help manage companion slots. Pass in the companion slots that you have, if any.</li>
+<li>First create a <a href="Classes/BCOVOUXAdComponentDisplayContainer.html"><code>BCOVOUXAdComponentDisplayContainer</code></a>. This object will help manage companion slots. Pass in the companion slots that you have, if any.</li>
 <li>BrightcoveOUX adds some category methods to <code>BCOVPlaybackManager</code>. The first of these is <code>-createOUXPlaybackControllerWithViewStrategy:</code>. Use this method to create your playback controller. You will typically pass <code>nil</code> for the view strategy.</li>
-<li>In order for the <code>BCOVOUXAdComponentDisplayContainer</code> to display ad information and populate companion ad views, it must be added as a session consumer.</li>
+<li>In order for the <a href="Classes/BCOVOUXAdComponentDisplayContainer.html"><code>BCOVOUXAdComponentDisplayContainer</code></a> to display ad information and populate companion ad views, it must be added as a session consumer.</li>
 <li>Add the playback controller&rsquo;s view to the video container in your own view hierarchy.</li>
 <li>Create a <code>BCOVVideo</code> using the URL to your OnceUX video.</li>
 <li>Load the video into the playback controller.</li>
@@ -129,6 +133,36 @@ pod 'Brightcove-Player-OnceUX/dynamic'
 
 
 <p>If you have questions or need help, visit the support forum for Brightcove Native Player SDKs at <a href="https://groups.google.com/forum/#!forum/brightcove-native-player-sdks">[https://groups.google.com/forum/](https://groups.google.com/forum/)#!forum/brightcove-native-player-sdks</a> .</p>
+
+<h1>Migrating OnceUX to SSAI</h1>
+
+<p>The BrightcoveSSAI plugin framework is taking the place of BrightcoveOUX. BrightcoveSSAI supports all the current features of BrightcoveOUX, however future updates will only be added to BrightcoveSSAI. Follow these instructions to migrate your OnceUX application to Brightcove SSAI.</p>
+
+<p>1) If you install Brightcove plugins using CocoaPods, update your Podfile by changing <code>Brightcove-Player-OnceUX</code> to <code>Brightcove-Player-SSAI</code>, for example this:
+<code>
+target 'MyVideoPlayer' do
+    pod 'Brightcove-Player-OnceUX/dynamic'
+end
+</code>
+becomes this:
+<code>
+target 'MyVideoPlayer' do
+    pod 'Brightcove-Player-SSAI/dynamic'
+end
+</code>
+If you use static frameworks, leave off <code>/dynamic</code> like this: <code>pod 'Brightcove-Player-SSAI'</code>. Run <code>'pod update'</code> when ready.</p>
+
+<p>If you install the Brightcove plugins manually, delete the Brightcove-Player-OnceUX framework from your Xcode project and follow the steps above to manually add the Brightcove-Player-SSAI framework.</p>
+
+<p>2) In your source code, for all @import / #import statements, data types, method names, properties, constants and protocols which refer to the BrightcoveOUX framework, change every occurrence of &ldquo;OUX&rdquo; to &ldquo;SSAI&rdquo;. A partial list is here:</p>
+
+<pre><code>"@import BrightcoveOUX;" is now "@import BrightcoveSSAI;"
+"createOUXSessionProviderWithUpstreamSessionProvider" is now "createSSAISessionProviderWithUpstreamSessionProvider"
+"createOUXPlaybackControllerWithViewStrategy" is now "createSSAIPlaybackControllerWithViewStrategy"
+"oux_seekToTime" is now "ssai_seekToTime"
+"BCOVOUXAdComponentDisplayContainer" is now "BCOVSSAIAdComponentDisplayContainer"
+"BCOVOUXCompanionSlot" is now "BCOVSSAICompanionSlot"
+</code></pre>
 
 <h1>Obtaining Ad playback Information</h1>
 
@@ -151,7 +185,7 @@ pod 'Brightcove-Player-OnceUX/dynamic'
 }];
 </code></pre>
 
-<p>The <code>completionHandler</code> will execute at the completion of a successful seek. It will not execute if a seek was already initiated by a previous call to <code>[BCOVSessionProviderExtension oux_seekToTime:completionHandler:]</code> or if an ad is playing back. To test whether a see attempt can be made, check the <code>[BCOVSessionProviderExtension oux_canSeek]</code> property. For more information on both of these methods, be sure to read the <a href="https://github.com/brightcove/brightcove-player-sdk-ios-oux/blob/master/ios/static/BrightcoveOUX.framework/Headers/BCOVOUXComponent.h">headerdoc</a>.</p>
+<p>The <code>completionHandler</code> will execute at the completion of a successful seek. It will not execute if a seek was already initiated by a previous call to <code>-[BCOVSessionProviderExtension oux_seekToTime:completionHandler:]</code> or if an ad is playing back. To test whether a seek attempt can be made, check the <code>-[BCOVSessionProviderExtension oux_canSeek]</code> property. For more information on both of these methods, be sure to read the <a href="[https://github.com/brightcove/brightcove-player-sdk-ios-oux/blob/master/ios/static/BrightcoveOUX.framework/Headers/BCOVOUXComponent.h](https://github.com/brightcove/brightcove-player-sdk-ios-oux/blob/master/ios/static/BrightcoveOUX.framework/Headers/BCOVOUXComponent.h)">headerdoc</a>.</p>
 
 <h1>Seeking With Ads Disabled</h1>
 
@@ -254,6 +288,13 @@ BCOVVideo *video = [BCOVVideo videoWithURL:[NSURL URLWithString:&lt;url-to-once-
 
 <p>See the README in the BrightcovePlayerSDK for more details about how to use and customize the PlayerUI controls.</p>
 
+<h1>Access to VMAP Response Data</h1>
+
+<p>Should you want access to the VMAP response data you can subscribe to the <code>kBCOVOUXVMAPResponseReceivedNotification</code> notification. Once received, the notification&rsquo;s userInfo dictionary will contain the VMAP response as NSData. You can use the <code>kBCOVOUXVMAPResponseReceivedNotificationDataUserInfoKey</code> constant to access it from userInfo. Since you may have multiple playback controllers, and thus multiple VMAP responses, you can check the notification&rsquo;s object, <code>id playbackController = notification.object</code> to verify which video the VMAP data is for. Additionally, when you subscribe to the notification you can set a playback controller as the object so that only VMAP data notifications regarding that playback controller will be received. For example:</p>
+
+<pre><code>[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(vmapResponseReceived:) name:kBCOVOUXVMAPResponseReceivedNotification object:self.playbackController];
+</code></pre>
+
 <h1>Known Issues</h1>
 
 <ul>
@@ -314,7 +355,7 @@ BCOVVideo *video = [BCOVVideo videoWithURL:[NSURL URLWithString:&lt;url-to-once-
 					<footer>
 						<div class="footer-copyright">
 							
-							<p class="copyright">Copyright &copy; 2019 Brightcove. All rights reserved. Updated: 2019-03-29</p>
+							<p class="copyright">Copyright &copy; 2019 Brightcove. All rights reserved. Updated: 2019-04-22</p>
 							
 							
 							<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>

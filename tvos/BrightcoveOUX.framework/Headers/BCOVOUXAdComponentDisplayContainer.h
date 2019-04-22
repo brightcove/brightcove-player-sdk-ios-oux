@@ -32,6 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
  * After creating this object, it must be added to the playback controller as a session
  * consumer via `-[BCOVPlaybackController addSessionConsumer:]`.
  */
+__deprecated_msg("Migrate to BrightcoveSSAI")
 @interface BCOVOUXAdComponentDisplayContainer : NSObject <BCOVPlaybackSessionConsumer>
 
 /**
@@ -65,6 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * A delegate for BCOVOUXAdComponentDisplayContainer.
  */
+__deprecated_msg("Migrate to BrightcoveSSAI")
 @protocol BCOVOUXAdComponentDelegate <NSObject>
 
 @optional

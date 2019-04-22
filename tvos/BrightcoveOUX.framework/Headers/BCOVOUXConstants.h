@@ -106,3 +106,12 @@ extern NSString * const kBCOVXMLElementContentKey;
  */
 extern NSString * const kBCOVOUXVASTAdCreativeExtensionsKey;
 extern NSString * const kBCOVOUXVASTAdExtensionsKey;
+
+/*
+ * Notification that is sent out when we receive a VMAP document response
+ */
+extern NSString * const kBCOVOUXVMAPResponseReceivedNotification;
+/*
+ * The notification's userInfo dictionary key for the raw VMAP data
+ */
+extern NSString * const kBCOVOUXVMAPResponseReceivedNotificationDataUserInfoKey;

@@ -1,4 +1,8 @@
-# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 6.4.2.589
+# Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 6.4.3.616
+
+## Deprecation Notice:
+
+The OnceUX Plugin is being replaced by the SSAI Plugin for Brightcove Player SDK for iOS. All OnceUX features are available in SSAI. Refer to the "Migrating OnceUX to SSAI" section of this README for details on upgrading your application.
 
 Supported Platforms
 ===================
@@ -74,7 +78,7 @@ BrightcoveOUX is a plugin for [Brightcove Player SDK for iOS][bcovsdk] that prov
     [6] [playbackController setVideos:@[ video ]];
         [playbackController play];
 
-Let's break this code down into steps, to make it a bit simpler to digest:
+To summarize:
 
 1. First create a `BCOVOUXAdComponentDisplayContainer`. This object will help manage companion slots. Pass in the companion slots that you have, if any.
 1. BrightcoveOUX adds some category methods to `BCOVPlaybackManager`. The first of these is `-createOUXPlaybackControllerWithViewStrategy:`. Use this method to create your playback controller. You will typically pass `nil` for the view strategy.
@@ -86,6 +90,36 @@ Let's break this code down into steps, to make it a bit simpler to digest:
 If you have questions or need help, visit the support forum for Brightcove Native Player SDKs at [https://groups.google.com/forum/#!forum/brightcove-native-player-sdks][forum] .
 
 [forum]: https://groups.google.com/forum/#!forum/brightcove-native-player-sdks
+
+Migrating OnceUX to SSAI
+=======
+
+The BrightcoveSSAI plugin framework is taking the place of BrightcoveOUX. BrightcoveSSAI supports all the current features of BrightcoveOUX, however future updates will only be added to BrightcoveSSAI. Follow these instructions to migrate your OnceUX application to Brightcove SSAI.
+
+1) If you install Brightcove plugins using CocoaPods, update your Podfile by changing `Brightcove-Player-OnceUX` to `Brightcove-Player-SSAI`, for example this:
+```
+target 'MyVideoPlayer' do
+	pod 'Brightcove-Player-OnceUX/dynamic'
+end
+```
+becomes this:
+```
+target 'MyVideoPlayer' do
+	pod 'Brightcove-Player-SSAI/dynamic'
+end
+```
+If you use static frameworks, leave off `/dynamic` like this: `pod 'Brightcove-Player-SSAI'`. Run `'pod update'` when ready.
+
+If you install the Brightcove plugins manually, delete the Brightcove-Player-OnceUX framework from your Xcode project and follow the steps above to manually add the Brightcove-Player-SSAI framework.
+
+2) In your source code, for all @import / #import statements, data types, method names, properties, constants and protocols which refer to the BrightcoveOUX framework, change every occurrence of "OUX" to "SSAI". A partial list is here:
+ 
+    "@import BrightcoveOUX;" is now "@import BrightcoveSSAI;"
+    "createOUXSessionProviderWithUpstreamSessionProvider" is now "createSSAISessionProviderWithUpstreamSessionProvider"
+    "createOUXPlaybackControllerWithViewStrategy" is now "createSSAIPlaybackControllerWithViewStrategy"
+    "oux_seekToTime" is now "ssai_seekToTime"
+    "BCOVOUXAdComponentDisplayContainer" is now "BCOVSSAIAdComponentDisplayContainer"
+    "BCOVOUXCompanionSlot" is now "BCOVSSAICompanionSlot"
 
 Obtaining Ad playback Information
 =======
@@ -111,7 +145,7 @@ The BrightcoveOUX plugin provides a seeking function that should be used when im
     
     }];
     
-The `completionHandler` will execute at the completion of a successful seek. It will not execute if a seek was already initiated by a previous call to `-[BCOVSessionProviderExtension oux_seekToTime:completionHandler:]` or if an ad is playing back. To test whether a see attempt can be made, check the `-[BCOVSessionProviderExtension oux_canSeek]` property. For more information on both of these methods, be sure to read the [headerdoc][oux_extensions].
+The `completionHandler` will execute at the completion of a successful seek. It will not execute if a seek was already initiated by a previous call to `-[BCOVSessionProviderExtension oux_seekToTime:completionHandler:]` or if an ad is playing back. To test whether a seek attempt can be made, check the `-[BCOVSessionProviderExtension oux_canSeek]` property. For more information on both of these methods, be sure to read the [headerdoc][oux_extensions].
 
 [oux_extensions]: https://github.com/brightcove/brightcove-player-sdk-ios-oux/blob/master/ios/static/BrightcoveOUX.framework/Headers/BCOVOUXComponent.h
 
@@ -210,6 +244,14 @@ Now create the `BCOVPlaybackController`, assign it to your player view, and then
     [playbackController play];
 
 See the README in the BrightcovePlayerSDK for more details about how to use and customize the PlayerUI controls.
+
+Access to VMAP Response Data
+==========================
+Should you want access to the VMAP response data you can subscribe to the `kBCOVOUXVMAPResponseReceivedNotification` notification. Once received, the notification's userInfo dictionary will contain the VMAP response as NSData. You can use the `kBCOVOUXVMAPResponseReceivedNotificationDataUserInfoKey` constant to access it from userInfo. Since you may have multiple playback controllers, and thus multiple VMAP responses, you can check the notification's object, `id playbackController = notification.object` to verify which video the VMAP data is for. Additionally, when you subscribe to the notification you can set a playback controller as the object so that only VMAP data notifications regarding that playback controller will be received. For example:
+
+```
+[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(vmapResponseReceived:) name:kBCOVOUXVMAPResponseReceivedNotification object:self.playbackController];
+```
 
 Known Issues
 ==========================

@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * This class represents a companion slot to be populated with a matching companion ad.
  */
+__deprecated_msg("Migrate to BrightcoveSSAI")
 @interface BCOVOUXCompanionSlot : NSObject
 
 /**

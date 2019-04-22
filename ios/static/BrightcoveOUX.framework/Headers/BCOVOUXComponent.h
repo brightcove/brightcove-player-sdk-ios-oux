@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @return A new playback controller with the specified parameters.
  */
-- (id<BCOVPlaybackController>)createOUXPlaybackController;
+- (id<BCOVPlaybackController>)createOUXPlaybackController __deprecated_msg("Migrate to BrightcoveSSAI");
 
 /**
  * Creates and returns a new OnceUX playback controller with the specified view
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  * playback controller.
  * @return A new playback controller with the specified parameters.
  */
-- (id<BCOVPlaybackController>)createOUXPlaybackControllerWithViewStrategy:(nullable BCOVPlaybackControllerViewStrategy)strategy;
+- (id<BCOVPlaybackController>)createOUXPlaybackControllerWithViewStrategy:(nullable BCOVPlaybackControllerViewStrategy)strategy __deprecated_msg("Migrate to BrightcoveSSAI");
 
 /**
  * Creates and returns a new BCOVOUX session provider with the specified
@@ -47,25 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param provider Optional upstream session provider.
  * @return A new BCOVOUXSessionProvider with the specified parameters.
  */
-- (id<BCOVPlaybackSessionProvider>)createOUXSessionProviderWithUpstreamSessionProvider:(nullable id<BCOVPlaybackSessionProvider>)provider;
-
-
-#if !TARGET_OS_TV
-/**
- * Returns a view strategy that wraps the video view it is given with the
- * default playback controls.
- *
- * This view strategy is intended to provide a "stock" set of controls to aide
- * development, testing, and Brightcove code samples.
- *
- * *** DEPRECATED ***
- * Use the built-in BrightcovePlayerSDK's PlayerUI controls instead.
- * See the BrightcovePlayerSDK README for details.
- *
- * @return A view strategy block that wraps the video view with stock controls.
- */
-- (BCOVPlaybackControllerViewStrategy)BCOVOUXdefaultControlsViewStrategy __attribute__((deprecated("Use the built-in BrightcovePlayerSDK's PlayerUI controls instead; see the BrightcovePlayerSDK README for details")));
-#endif
+- (id<BCOVPlaybackSessionProvider>)createOUXSessionProviderWithUpstreamSessionProvider:(nullable id<BCOVPlaybackSessionProvider>)provider __deprecated_msg("Migrate to BrightcoveSSAI");
 
 @end
 
@@ -81,7 +63,7 @@ NS_ASSUME_NONNULL_BEGIN
  * is still processing a previous messaging of `oux_seekToTime:completionHandler:`;
  * otherwise, the value of this property is YES. See also `oux_seekToTime:completionHandler:`.
  */
-@property (nonatomic, readonly) BOOL oux_canSeek;
+@property (nonatomic, readonly) BOOL oux_canSeek __deprecated_msg("Migrate to BrightcoveSSAI");
 
 /**
  * This method implements the default seek behaviour for the BCOVOUX plugin.
@@ -101,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param time The logical time to seek to
  * @param completionHandler The block to execute when the seek is performed
  */
-- (void)oux_seekToTime:(CMTime)time completionHandler:(void (^)(BOOL finished))completionHandler;
+- (void)oux_seekToTime:(CMTime)time completionHandler:(void (^)(BOOL finished))completionHandler __deprecated_msg("Migrate to BrightcoveSSAI");
 
 /**
  * Returns the absolute time that corresponds to the specified content time.
@@ -117,7 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param contentTime A time offset into the video content.
  * @return The absolute time that corresponds to the specified content time.
  */
-- (CMTime)oux_absoluteTimeAtContentTime:(CMTime)contentTime;
+- (CMTime)oux_absoluteTimeAtContentTime:(CMTime)contentTime __deprecated_msg("Migrate to BrightcoveSSAI");
 
 /**
  * Returns the content time that corresponds to the specified absolute time.
@@ -134,7 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param absoluteTime A time offset into the video payload.
  * @return The content time that corresponds to the specified absolute time.
  */
-- (CMTime)oux_contentTimeAtAbsoluteTime:(CMTime)absoluteTime;
+- (CMTime)oux_contentTimeAtAbsoluteTime:(CMTime)absoluteTime __deprecated_msg("Migrate to BrightcoveSSAI");
 
 @end
 
