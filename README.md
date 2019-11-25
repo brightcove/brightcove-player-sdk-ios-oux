@@ -1,8 +1,9 @@
 # Brightcove OnceUX Plugin for Brightcove Player SDK for iOS, version 6.4.3.616
 
-## Deprecation Notice:
+Important Notice
+================
 
-The OnceUX Plugin is being replaced by the SSAI Plugin for Brightcove Player SDK for iOS. All OnceUX features are available in SSAI. Refer to the "Migrating OnceUX to SSAI" section of this README for details on upgrading your application.
+The OnceUX Plugin has been replaced by the SSAI Plugin for Brightcove Player SDK for iOS and all OnceUX features are available in SSAI. Refer to the "Migrating OnceUX to SSAI" section of this README for details on upgrading your application. The SSAI plugin can be found [here][https://github.com/brightcove/brightcove-player-sdk-ios-ssai].
 
 Supported Platforms
 ===================
